@@ -1,0 +1,24 @@
+{
+  "scripts": {
+    "dev": "node src/index.js"
+  },
+  "devDependencies": {
+    "nodemon": "3.0.1"
+  },
+  "name": "ffmpeg_utility",
+  "version": "1.0.0",
+  "description": "Simple ffmpeg utility to improve my design patterns skill",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/R1ON/ffmpeg.git"
+  },
+  "author": "R1ON",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/R1ON/ffmpeg/issues"
+  },
+  "homepage": "https://github.com/R1ON/ffmpeg#readme",
+  "dependencies": {
+    "ffmpeg": "0.0.4"
+  }
+}
