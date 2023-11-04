@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "dev": "node src/index.js"
+    "dev": "node index.js"
   },
   "devDependencies": {
     "nodemon": "3.0.1"
@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/R1ON/ffmpeg#readme",
   "dependencies": {
-    "ffmpeg": "0.0.4"
+    "ffmpeg": "0.0.4",
+    "inquirer": "^8.2.6"
   }
 }
