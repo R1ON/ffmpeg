@@ -1,6 +1,11 @@
+import { PromptService } from './core/prompt/prompt.service';
+
 class App {
     run = () => {
-        console.log('test');
+        const prompt = new PromptService();
+
+        const res = prompt.input('WIDTH', Number);
+        console.log('test', res);
     };
 }
 
