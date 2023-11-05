@@ -5,7 +5,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        - REALIZATION=${REALIZATION}
+    env_file:
+      - .env
     ports:
       - 3000:3000
     volumes:
-      - .:/app
+      - ./sources:/app/sources
