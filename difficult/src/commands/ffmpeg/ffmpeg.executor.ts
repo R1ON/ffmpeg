@@ -15,17 +15,18 @@ export class FfmpegExecutor extends CommandExecutor<FfmpegInput> {
         super(logger);
     }
 
-    protected prompt = (): FfmpegInput => {
+    protected prompt = async (): Promise<FfmpegInput> => {
         const width = this.promptService.input('WIDTH', Number);
         const height = this.promptService.input('HEIGHT', Number);
         const name = this.promptService.input('FINAL_NAME', String);
-        const pathToSource = this.promptService.input('PATH_TO_SOURCE', String);
+        const pathToSource = await this.fileService.getFilePathFromSourcesFolder();
 
         return { width, height, name, path: pathToSource };
     };
 
     protected build = ({ path, name, width, height }: FfmpegInput): CommandExecFfmpeg => {
-        const output = this.fileService.getFilePath(path, name, 'mp4');
+        const sourceFolder = this.fileService.getSourceFolder();
+        const output = this.fileService.getFilePath(sourceFolder, name, 'mp4');
 
         const args = (new FfmpegBuilder())
             .input(path)
@@ -35,12 +36,12 @@ export class FfmpegExecutor extends CommandExecutor<FfmpegInput> {
         return { command: 'ffmpeg', args, output };
     };
 
-    protected spawn = ({
+    protected spawn = async ({
         output,
         command,
         args,
-    }: CommandExecFfmpeg): ChildProcessWithoutNullStreams => {
-        this.fileService.deleteFileIfExists(output);
+    }: CommandExecFfmpeg): Promise<ChildProcessWithoutNullStreams> => {
+        await this.fileService.deleteFileIfExists(output);
 
         return spawn(command, args);
     };
