@@ -13,13 +13,7 @@ export class FileService {
     };
 
     public getFilePath = (path: string, name: string, ext: string) => {
-        let correctPath = path;
-
-        if (isAbsolute(path)) {
-            correctPath = join(`${__dirname}/${path}`);
-        }
-
-        return join(`${dirname(correctPath)}/${name}.${ext}`);
+        return join(`${path}/${name}.${ext}`);
     };
 
     public deleteFileIfExists = async (path: string) => {
@@ -27,4 +21,27 @@ export class FileService {
             promises.unlink(path);
         }
     };
+
+    public getSourceFolder = () => {
+        return join(process.cwd(), 'sources');
+    };
+
+    public getFilePathFromSourcesFolder = async (): Promise<string> => {
+        const sourceFolder = this.getSourceFolder();
+
+        const files = await promises.readdir(sourceFolder);
+
+        const filteredFiles = files.filter((name) => (
+            name !== 'README.md'
+        ));
+
+        const file = join(sourceFolder, filteredFiles[0]);
+        
+        if (!file) {
+            console.error('В папке sources нет подходящего .mp4 файла');
+            process.exit();
+        }
+
+        return file;
+    }
 };
