@@ -5,8 +5,14 @@ export class StreamHandler {
     constructor(private logger: StreamLogger) {}
 
     processOutput = (stream: ChildProcessWithoutNullStreams)  => {
-        stream.stdout.on('data', this.logger.log);
-        stream.stderr.on('data', this.logger.error);
+        stream.stdout.on('data', (data) => {
+            this.logger.log(data.toString());
+        });
+
+        stream.stderr.on('data', (data) => {
+            this.logger.error(data.toString());
+        });
+
         stream.on('close', this.logger.end);
     };
 };

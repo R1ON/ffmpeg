@@ -1,11 +1,9 @@
-import { PromptService } from './core/prompt/prompt.service';
+import { FfmpegExecutor } from './commands/ffmpeg/ffmpeg.executor';
+import { ConsoleLogger } from './out/console-logger/console-logger';
 
 class App {
     run = () => {
-        const prompt = new PromptService();
-
-        const res = prompt.input('WIDTH', Number);
-        console.log('test', res);
+        new FfmpegExecutor(ConsoleLogger.getInstance()).execute();
     };
 }
 

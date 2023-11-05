@@ -23,6 +23,3 @@ export class ConsoleLogger implements StreamLogger {
         console.log('Готово!!!');
     };
 };
-
-
-new StreamHandler(new ConsoleLogger());
