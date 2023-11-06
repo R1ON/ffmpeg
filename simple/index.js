@@ -1,3 +1,5 @@
+require('dotenv').config({ path: process.cwd() });
+
 const { spawn } = require('child_process');
 const { promises } = require('fs');
 const { join } = require('path');
